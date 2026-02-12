@@ -1,0 +1,200 @@
+{% extends './base.html' %}
+
+{% block title %}IT Dine - Блюда{% endblock %}
+
+{% block content %}
+<main class="menu-list">
+  <section class="section">
+    <div class="container">
+      <!-- Заголовок меню -->
+      <div class="menu-list-head">
+        <div class="menu-list-titlebox">
+          <h1 class="menu-list-title">{{ menu.name }}</h1>
+          <p class="menu-list-subtitle">
+            {{ menu.description }}
+          </p>
+        </div>
+
+        <!-- Панель фильтров -->
+        <div class="menu-controls">
+          <label class="control">
+            <span class="control-label">Поиск по названию</span>
+            <div class="control-input">
+              <span class="control-icon" aria-hidden="true">⌕</span>
+              <input
+                class="input input-compact"
+                type="text"
+                placeholder="Например: Deploy, API, Mojito..."
+              />
+            </div>
+          </label>
+
+          <label class="control">
+            <span class="control-label">Сортировка</span>
+            <select class="input input-compact select">
+              <option value="name_asc">По имени (А–Я)</option>
+              <option value="name_desc">По имени (Я–А)</option>
+              <option value="price_asc">По цене (сначала дешевле)</option>
+              <option value="price_desc">По цене (сначала дороже)</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <!-- Доп. панель: быстрые фильтры (опционально) -->
+      <div class="menu-quickbar">
+        <div class="menu-counter">
+          Найдено: <b>12</b>
+        </div>
+      </div>
+
+      <!-- Сетка блюд -->
+      <div class="dish-grid dish-grid-wide">
+        <article class="dish-card">
+          <div class="dish-media">
+            <img src="https://placehold.co/800x600/png" alt="Коктейль Deploy">
+            <div class="dish-badge">Бар</div>
+            <div class="dish-media-shape" aria-hidden="true"></div>
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-title">Коктейль “Deploy”</h3>
+            <p class="dish-desc">Цитрус, мята, микс-сироп, лёд. Можно безалкогольный.</p>
+
+            <div class="dish-meta">
+              <span class="meta">350 мл</span>
+              <span class="meta">цитрус</span>
+              <span class="meta">fresh</span>
+            </div>
+
+            <div class="dish-bottom">
+              <div class="dish-price">199 c</div>
+              <button class="dish-btn" type="button">Добавить</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="dish-card">
+          <div class="dish-media">
+            <img src="https://placehold.co/800x600/png" alt="Лимонад API">
+            <div class="dish-badge">Напиток</div>
+            <div class="dish-media-shape" aria-hidden="true"></div>
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-title">Лимонад “API”</h3>
+            <p class="dish-desc">Апельсин, лайм, газировка, лёд. Максимально освежает.</p>
+
+            <div class="dish-meta">
+              <span class="meta">450 мл</span>
+              <span class="meta">без алкоголя</span>
+            </div>
+
+            <div class="dish-bottom">
+              <div class="dish-price">129 c</div>
+              <button class="dish-btn" type="button">Добавить</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="dish-card">
+          <div class="dish-media">
+            <img src="https://placehold.co/800x600/png" alt="Espresso Tonic">
+            <div class="dish-badge">Хит</div>
+            <div class="dish-media-shape" aria-hidden="true"></div>
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-title">Espresso Tonic</h3>
+            <p class="dish-desc">Эспрессо, тоник, апельсиновая цедра. Горько-свежо.</p>
+
+            <div class="dish-meta">
+              <span class="meta">300 мл</span>
+              <span class="meta">кофейный</span>
+            </div>
+
+            <div class="dish-bottom">
+              <div class="dish-price">159 c</div>
+              <button class="dish-btn" type="button">Добавить</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="dish-card">
+          <div class="dish-media">
+            <img src="https://placehold.co/800x600/png" alt="Мохито">
+            <div class="dish-badge">Классика</div>
+            <div class="dish-media-shape" aria-hidden="true"></div>
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-title">Mojito</h3>
+            <p class="dish-desc">Лайм, мята, лёд, газировка. Можно 0% по запросу.</p>
+
+            <div class="dish-meta">
+              <span class="meta">400 мл</span>
+              <span class="meta">мята</span>
+            </div>
+
+            <div class="dish-bottom">
+              <div class="dish-price">189 c</div>
+              <button class="dish-btn" type="button">Добавить</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="dish-card">
+          <div class="dish-media">
+            <img src="https://placehold.co/800x600/png" alt="Negroni">
+            <div class="dish-badge">Крепкий</div>
+            <div class="dish-media-shape" aria-hidden="true"></div>
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-title">Negroni</h3>
+            <p class="dish-desc">Горько-сладкий коктейль, апельсиновая цедра, лёд.</p>
+
+            <div class="dish-meta">
+              <span class="meta">250 мл</span>
+              <span class="meta">крепкий</span>
+            </div>
+
+            <div class="dish-bottom">
+              <div class="dish-price">249 c</div>
+              <button class="dish-btn" type="button">Добавить</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="dish-card">
+          <div class="dish-media">
+            <img src="https://placehold.co/800x600/png" alt="Mocktail Sunset">
+            <div class="dish-badge">0%</div>
+            <div class="dish-media-shape" aria-hidden="true"></div>
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-title">Mocktail “Sunset”</h3>
+            <p class="dish-desc">Манго, апельсин, гранат, лёд. Сладко и ярко.</p>
+
+            <div class="dish-meta">
+              <span class="meta">400 мл</span>
+              <span class="meta">без алкоголя</span>
+              <span class="meta">сладкий</span>
+            </div>
+
+            <div class="dish-bottom">
+              <div class="dish-price">169 c</div>
+              <button class="dish-btn" type="button">Добавить</button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Пагинация (заглушка) -->
+      <div class="menu-pagination">
+        <div class="menu-pages">
+          <button class="page is-active" type="button">1</button>
+          <button class="page" type="button">2</button>
+          <button class="page" type="button">3</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
+

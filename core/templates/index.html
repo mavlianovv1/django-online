@@ -1,0 +1,233 @@
+{% extends './base.html' %}
+
+{% block title %}IT Dine - Главная{% endblock %}
+
+{% block content %}
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <div class="badge">
+            <span class="dot" aria-hidden="true"></span>
+            Сегодня: горячие завтраки и барное меню
+          </div>
+
+          <h1 class="hero-title">IT Dine — вкусно, быстро, красиво.</h1>
+          <p class="hero-text">
+            Выбирайте категорию, смотрите блюда и оформляйте заказ на месте.
+            Дизайн как в удобном онлайн-меню: чисто, понятно, аппетитно.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#menus">Открыть меню</a>
+            <a class="btn btn-ghost" href="#dishes">Популярные блюда</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <div class="stat-value">12–15</div>
+              <div class="stat-label">мин средняя подача</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">4.8</div>
+              <div class="stat-label">рейтинг гостей</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">3</div>
+              <div class="stat-label">локации в городе</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-card">
+            <div class="hero-card-top">
+              <div class="chip">Рекомендация</div>
+              <div class="price">от 249 c</div>
+            </div>
+
+            {% if random_position %}
+    <h2 class="hero-card-title">{{ random_position.name }}</h2>
+
+    <div class="hero-card-tags">
+      {% for ing in random_position.ingridients.all %}
+        <span class="tag">{{ ing.name }}</span>
+      {% empty %}
+        <span class="tag">Ингредиенты отсутствуют</span>
+      {% endfor %}
+    </div>
+  {% else %}
+    <h2 class="hero-card-title">Блюдо отсутствует</h2>
+  {% endif %}
+
+            <!-- <h2 class="hero-card-title">Фирменный “Dev Burger”</h2> -->
+            <!-- <p class="hero-card-desc">
+              Сочная котлета, сыр чеддер, хрустящий салат, соус “IT”.
+            </p> -->
+            <!-- <div class="hero-card-tags">
+              <span class="tag">Сытно</span>
+              <span class="tag">Хит</span>
+              <span class="tag">Без лишнего</span>
+            </div>
+            <div class="hero-card-bottom">
+              <button class="mini-btn" type="button">Смотреть все блюда</button>
+            </div> -->
+
+            <div class="hero-glow" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="menus">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Основные меню</h2>
+        </div>
+
+        <div class="menu-grid">
+            {% for m in menus %}
+          <a class="menu-card" href="#dishes">
+            <div class="menu-icon" aria-hidden="true">
+                <img src="{{ m.image.url }}" alt="">
+            </div>
+            <div class="menu-info">
+              <div class="menu-name">{{ m.name }}</div>
+            <div class="menu-desc">{{ m.description }}</div>
+            </div>
+            <div class="menu-arrow" aria-hidden="true">→</div>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="dishes">
+      <div class="container">
+        <div class="section-head section-head-row">
+          <div>
+            <h2 class="section-title">Популярные блюда</h2>
+            <p class="section-subtitle">Нажмите на карточку — будто выбираете в приложении.</p>
+          </div>
+
+          <div class="filters">
+            <button class="pill is-active" type="button">Все</button>
+            <button class="pill" type="button">Завтраки</button>
+            <button class="pill" type="button">Основное</button>
+            <button class="pill" type="button">Бар</button>
+          </div>
+        </div>
+
+        <div class="dish-grid">
+            {% for p in positions %}
+          <article class="dish-card">
+            <div class="dish-media">
+                <img src="{{ p.image.url }}" alt="">
+              <div class="dish-badge">Хит</div>
+              <div class="dish-media-shape" aria-hidden="true"></div>
+            </div>
+
+            <div class="dish-body">
+              <h3 class="dish-title">{{ p.name }}</h3>
+              <p class="dish-desc">
+                {% for i in p.ingridients.all %}
+                {{ i.name }} 
+                {% endfor %}
+              </p>
+
+              <div class="dish-meta">
+                <span class="meta">{{ p.volume }} {{ p.volume_type }}</span>
+              </div>
+
+              <div class="dish-bottom">
+                <div class="dish-price">{{ p.price }} c</div>
+                <button class="dish-btn" type="button">Добавить</button>
+              </div>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+
+      </div>
+    </section>
+
+
+    <section class="section" id="locations">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Адреса</h2>
+      <p class="section-subtitle">Выберите удобную локацию.</p>
+    </div>
+
+    <div class="locations-grid">
+      {% for addr in addresses %}
+      <article class="loc-card">
+        <h3 class="loc-title">{{ addr.name }}</h3>
+        <p class="loc-line">{{ addr.street }}, {{ addr.building_number }}</p>
+        <p class="loc-line">Ежедневно: {{ addr.start_time}} — {{ addr.end_time }}</p>
+        <div class="loc-actions">
+          <a class="btn btn-ghost btn-sm" href="tel:{{ addr.phone_number }}">Позвонить</a>
+          <a class="btn btn-primary btn-sm" href="{{ addr.map_url }}" target="_blank">Как добраться</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+    <section class="section section-dark" id="contacts">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- Левая колонка: контакты -->
+      <div>
+        <h2 class="section-title section-title-invert">Контакты</h2>
+        <p class="section-subtitle section-subtitle-invert">
+          Мы на связи — бронирования, вопросы по меню, корпоративные заказы.
+        </p>
+
+        {% for c in contacts %}
+        <div class="contact-cards">
+          <div class="contact-card">
+            <div class="contact-k">Телефон</div>
+            <a class="contact-v" href="tel:{{ c.phone }}">{{ c.phone }}</a>
+          </div>
+          <div class="contact-card">
+            <div class="contact-k">Instagram</div>
+            <a class="contact-v" href="#">{{ c.instagram }}</a>
+          </div>
+          <div class="contact-card">
+            <div class="contact-k">Почта</div>
+            <a class="contact-v" href="mailto:{{ c.email }}">{{ c.email }}</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Правая колонка: форма -->
+      <form class="form" action="#" method="post">
+        <h3 class="form-title">Быстрая заявка</h3>
+        <p class="form-sub">Оставьте контакты — мы перезвоним.</p>
+
+        <label class="field">
+          <span class="field-label">Имя</span>
+          <input class="input" type="text" name="name" placeholder="Введите имя" />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Телефон</span>
+          <input class="input" type="tel" name="phone" placeholder="+996 ..." />
+        </label>
+
+        <label class="field" style="margin-bottom: 20px;">
+          <span class="field-label">Комментарий</span>
+          <textarea class="input textarea" name="comment" placeholder="Например: столик на 19:00"></textarea>
+        </label>
+
+        <button class="btn btn-primary btn-full" type="button">Отправить</button>
+        <p class="form-foot">Нажимая “Отправить”, вы соглашаетесь на обработку данных.</p>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
